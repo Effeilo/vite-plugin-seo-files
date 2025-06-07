@@ -12,7 +12,7 @@ It integrates easily into your Vite configuration without any `.env` dependency 
 
 > A practical way to improve indexing and crawling for your static sites or SPAs.
 
-![npm version](https://img.shields.io/npm/v/vite-plugin-seo-files.svg?style=flat&color=orange)
+[![npm version](https://img.shields.io/npm/v/vite-plugin-seo-files.svg)](https://www.npmjs.com/package/vite-plugin-seo-files)
 ![vite compatibility](https://img.shields.io/badge/Vite-4%2B%20%7C%205%2B-646CFF.svg?logo=vite&logoColor=white)
 
 
