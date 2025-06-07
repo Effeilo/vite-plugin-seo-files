@@ -36,7 +36,8 @@ export default defineConfig({
             siteUrl: 'https://example.com', // ✅ Obligatoire
             generateSitemap: true, // facultatif, défaut : true
             generateRobots: true, // facultatif, défaut : true
-            exclude: ['test.html', 'drafts/**'] // facultatif, glob patterns
+            exclude: ['test.html', 'drafts/**'], // facultatif, glob patterns
+            disallow: ['/private/', '/secret.html'] // facultatif, chemins à exclure dans robots.txt
         })
     ]
 });
@@ -59,12 +60,14 @@ Après `vite build`, le plugin écrit automatiquement dans `dist/` :
 | `generateSitemap` | `boolean`  | `true`     | Active/désactive la génération du `sitemap.xml`                     |
 | `generateRobots`  | `boolean`  | `true`     | Active/désactive la génération du `robots.txt`                      |
 | `exclude`         | `string[]` | `[]`       | Liste de patterns glob à ignorer dans le `sitemap.xml`              |
+| `disallow`        | `string[]` | `[]`       | Liste de chemins à exclure via `robots.txt` (directive Disallow)    |
 
 ## ✨ Fonctionnalités incluses
 
 - Extraction de la date de modification réelle (`lastmod`) des fichiers `.html`
 - Compatible avec tous les projets Vite (SPA, MPA, static)
 - Exclusion personnalisée via `exclude`
+- Règles Disallow personnalisables via `disallow`
 - Aucun besoin de `.env` 
 
 ## 📁 Exemples
@@ -109,9 +112,14 @@ dist/
 ```bash
 # https://www.robotstxt.org/
 
+# Allow all crawlers full access
 User-agent: *
-Disallow:
 
+# Prevent indexing of sensitive or non-public areas
+Disallow: /private/
+Disallow: /secret.html
+
+# Sitemap file
 Sitemap: https://browserux.com/sitemap.xml
 ```
 
@@ -120,6 +128,7 @@ Sitemap: https://browserux.com/sitemap.xml
 - Le champ `siteUrl` doit être une URL absolue (commençant par `https://`)
 - Le plugin s’exécute uniquement lors du `vite build`, pas en dev
 - Utilisez `exclude` pour retirer des pages de brouillon, erreurs, etc.
+- Utilisez `disallow` pour empêcher l’indexation de chemins spécifiques via `robots.txt`
 
 ## ⚖️ Licence
 

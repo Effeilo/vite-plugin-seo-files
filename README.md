@@ -36,7 +36,8 @@ export default defineConfig({
             siteUrl: 'https://example.com', // ✅ Required
             generateSitemap: true, // optional, default: true
             generateRobots: true, // optional, default: true
-            exclude: ['test.html', 'drafts/**'] // optional, glob patterns
+            exclude: ['test.html', 'drafts/**'], // optional, glob patterns
+            disallow: ['/private/', '/secret.html'] // optional, robots.txt disallow rules
         })
     ]
 });
@@ -59,12 +60,14 @@ After `vite build`, the plugin automatically writes to `dist/`:
 | `generateSitemap` | `boolean`  | `true`    | Enable/disable sitemap generation                                |
 | `generateRobots`  | `boolean`  | `true`    | Enable/disable robots.txt generation                             |
 | `exclude`         | `string[]` | `[]`      | List of glob patterns to exclude from the sitemap                |
+| `disallow`        | `string[]` | `[]`      | List of paths to disallow in robots.txt                          |
 
 ## ✨ Included Features
 
 - Extracts real `lastmod` modification dates from `.html` files
 - Compatible with all Vite projects (SPA, MPA, static)
 - Custom exclusion via `exclude`
+- robots.txt disallow rules via `disallow`
 - No need for `.env` configuration
 
 ## 📁 Examples
@@ -109,9 +112,14 @@ dist/
 ```bash
 # https://www.robotstxt.org/
 
+# Allow all crawlers full access
 User-agent: *
-Disallow:
 
+# Prevent indexing of sensitive or non-public areas
+Disallow: /private/
+Disallow: /secret.html
+
+# Sitemap file
 Sitemap: https://browserux.com/sitemap.xml
 ```
 
@@ -120,6 +128,7 @@ Sitemap: https://browserux.com/sitemap.xml
 - The `siteUrl` field must be an absolute URL (starting with `https://`)
 - The plugin only runs during `vite build`, not during development
 - Use `exclude` to ignore draft or error pages from the sitemap
+- Use `disallow` to prevent indexing of specific paths in robots.txt
 
 ## ⚖️ License
 

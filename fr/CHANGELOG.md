@@ -15,6 +15,20 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.1.0] – 06-07-2025
+
+### ✨ Added
+
+- Option `disallow` permettant de définir des chemins à exclure dans `robots.txt`
+- Documentation et exemples d'utilisation de l'option `disallow`
+- Exemple de code avec directives Disallow dans `robots.txt`
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.0] – 06-07-2025
 
 ### ✨ Ajout

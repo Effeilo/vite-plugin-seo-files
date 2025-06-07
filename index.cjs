@@ -10,13 +10,15 @@ const { globSync } = require('glob');
  * @param {boolean} [options.generateSitemap=true]
  * @param {boolean} [options.generateRobots=true]
  * @param {string[]} [options.exclude=[]] - Glob patterns to exclude from sitemap
+ * @param {string[]} [options.disallow=[]] - Paths to disallow in robots.txt
  */
 function seoFilesPlugin(options = {}) {
     const {
         siteUrl,
         generateSitemap = true,
         generateRobots = true,
-        exclude = []
+        exclude = [],
+        disallow = []
     } = options;
 
     if (!siteUrl || !/^https?:\/\//.test(siteUrl)) {
@@ -64,11 +66,19 @@ function seoFilesPlugin(options = {}) {
 
             // === robots.txt ===
             if (generateRobots) {
+                const disallowLines = disallow.length
+                    ? disallow.map(path => `Disallow: ${path}`).join('\n')
+                    : 'Disallow:';
+
                 const robots = `# https://www.robotstxt.org/
 
+# Allow all crawlers full access
 User-agent: *
-Disallow:
 
+# Prevent indexing of sensitive or non-public areas
+${disallowLines}
+
+# Sitemap file
 Sitemap: ${siteUrl.replace(/\/$/, '')}/sitemap.xml`;
 
                 fs.writeFileSync(path.join(distDir, 'robots.txt'), robots);

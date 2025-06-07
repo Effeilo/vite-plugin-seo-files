@@ -15,6 +15,20 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [1.1.0] – 2025-06-07
+
+### ✨ Added
+
+- `disallow` option to specify paths excluded from robots.txt
+- Documentation and usage examples for the new `disallow` option
+- Example output showing Disallow directives in `robots.txt`
+
+<br>
+
+---
+
+<br>
+
 ## [1.0.0] – 2025-06-07
 
 ### ✨ Added
