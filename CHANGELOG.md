@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [1.2.1] – 2025-06-08
+
+### 🐛 Fixed
+
+- Fixed dynamic import of `routes-list.js` using `import()` in ESM
+
+<br>
+
+---
+
+<br>
+
 ## [1.2.0] – 2025-06-08
 
 ### ✨ Added

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { globSync } from 'glob';
+import { pathToFileURL } from 'url';
 
 /**
  * Vite plugin: Generates SEO-related files (sitemap.xml, robots.txt)
@@ -41,7 +42,7 @@ export default function seoFilesPlugin(options = {}) {
                 let urls = '';
 
             if (fs.existsSync(srcRoutesPath)) {
-                const routesModule = await import(srcRoutesPath);
+                const routesModule = await import(pathToFileURL(srcRoutesPath).href);
                 const routes = routesModule.default || [];
                 urls = routes.map(route => {
                     return `

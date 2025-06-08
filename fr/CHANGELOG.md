@@ -15,6 +15,18 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.2.1] – 08-06-2025
+
+### 🐛 Correction
+
+- Correction de l'import dynamique de `routes-list.js` via `import()` en ESM
+
+<br>
+
+---
+
+<br>
+
 ## [1.2.0] – 08-06-2025
 
 ### ✨ Ajout
