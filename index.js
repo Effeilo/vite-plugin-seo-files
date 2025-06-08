@@ -28,8 +28,9 @@ export default function seoFilesPlugin(options = {}) {
     return {    
         name: 'vite-plugin-seo-files',
 
-        closeBundle() {
+        async closeBundle() {
             const distDir = path.resolve(process.cwd(), 'dist');
+            const srcRoutesPath = path.resolve(process.cwd(), 'src/routes-list.js');
 
             if (!fs.existsSync(distDir)) {
                 fs.mkdirSync(distDir, { recursive: true });
@@ -37,12 +38,26 @@ export default function seoFilesPlugin(options = {}) {
 
             // === Sitemap ===
             if (generateSitemap) {
+                let urls = '';
+
+            if (fs.existsSync(srcRoutesPath)) {
+                const routesModule = await import(srcRoutesPath);
+                const routes = routesModule.default || [];
+                urls = routes.map(route => {
+                    return `
+    <url>
+        <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <priority>${route === '/' ? '1.00' : '0.50'}</priority>
+    </url>`;
+                }).join('');
+            } else {
                 const files = globSync('**/*.html', {
                     cwd: distDir,
                     ignore: ['404.html', '403.html', ...exclude],
                 });
 
-                const urls = files.map((file) => {
+                urls = files.map((file) => {
                     const loc = `${siteUrl.replace(/\/$/, '')}/${file.replace(/index\.html$/, '').replace(/\\/g, '/')}`;
                     const stats = fs.statSync(path.join(distDir, file));
                     const lastmod = stats.mtime.toISOString().split('T')[0];
@@ -54,7 +69,8 @@ export default function seoFilesPlugin(options = {}) {
         <lastmod>${lastmod}</lastmod>
         <priority>${priority}</priority>
     </url>`;
-                 }).join('');
+                }).join('');
+            }
 
                 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}

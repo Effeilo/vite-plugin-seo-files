@@ -8,7 +8,7 @@
 
 **`vite-plugin-seo-files`** est un plugin Vite qui automatise la génération des fichiers SEO techniques essentiels (`sitemap.xml`, `robots.txt`) **après le build**. Il est compatible ESM et CommonJS grâce à un double système d'exports.
 
-Il s’intègre facilement dans votre configuration Vite, sans dépendance à `.env`, et fonctionne avec tous les frameworks (HTML statique, React, Vue, Svelte…).
+Il s’intègre facilement dans votre configuration Vite et fonctionne avec tous les frameworks (HTML statique, React, Vue, Svelte…).
 
 > Pratique pour améliorer l’indexation et le crawl de vos sites statiques ou SPA.
 
@@ -43,6 +43,21 @@ export default defineConfig({
 });
 ```
 
+### Cas des SPA (SPA React, Vue, etc.)
+
+Pour les projets en Single Page Application, vous pouvez ajouter un fichier `routes-list.js`  dans le dossier `src/`
+Si ce fichier est détecté (`src/routes-list.js`) est détecté, il sera automatiquement utilisé pour générer le sitemap à partir des routes déclarées. 
+Sinon, le plugin utilisera par défaut les fichiers `.html` présents dans `dist/`.
+
+**Exemple de fichier** `routes-list.js` :
+
+```js
+export default [
+    '/',
+    '/about'
+];
+```
+
 ## 🧾 Fichiers générés
 
 Après `vite build`, le plugin écrit automatiquement dans `dist/` :
@@ -65,10 +80,10 @@ Après `vite build`, le plugin écrit automatiquement dans `dist/` :
 ## ✨ Fonctionnalités incluses
 
 - Extraction de la date de modification réelle (`lastmod`) des fichiers `.html`
+- Utilisation automatique de `src/routes-list.js` si présent (pour les SPA)
 - Compatible avec tous les projets Vite (SPA, MPA, static)
 - Exclusion personnalisée via `exclude`
 - Règles Disallow personnalisables via `disallow`
-- Aucun besoin de `.env` 
 
 ## 📁 Exemples
 

@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [1.2.0] – 2025-06-08
+
+### ✨ Added
+
+- Automatic detection of a `src/routes-list.js` file for SPA projects (React, Vue, etc.)
+- Uses the listed routes to generate `sitemap.xml` if the file is present
+- Falls back to standard HTML file scanning if not found
+- Documentation updated with a `routes-list.js` example
+
+<br>
+
+---
+
+<br>
+
 ## [1.1.0] – 2025-06-07
 
 ### ✨ Added

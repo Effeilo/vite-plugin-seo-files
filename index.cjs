@@ -1,4 +1,3 @@
-// index.cjs
 const fs = require('fs');
 const path = require('path');
 const { globSync } = require('glob');
@@ -28,8 +27,9 @@ function seoFilesPlugin(options = {}) {
     return {
         name: 'vite-plugin-seo-files',
 
-        closeBundle() {
+        async closeBundle() {
             const distDir = path.resolve(process.cwd(), 'dist');
+            const srcRoutesPath = path.resolve(process.cwd(), 'src/routes-list.js');
 
             if (!fs.existsSync(distDir)) {
                 fs.mkdirSync(distDir, { recursive: true });
@@ -37,24 +37,39 @@ function seoFilesPlugin(options = {}) {
 
             // === Sitemap ===
             if (generateSitemap) {
-                const files = globSync('**/*.html', {
-                    cwd: distDir,
-                    ignore: ['404.html', '403.html', ...exclude],
-                });
+                let urls = '';
 
-                const urls = files.map((file) => {
-                    const loc = `${siteUrl.replace(/\/$/, '')}/${file.replace(/index\.html$/, '').replace(/\\/g, '/')}`;
-                    const stats = fs.statSync(path.join(distDir, file));
-                    const lastmod = stats.mtime.toISOString().split('T')[0];
-                    const priority = file === 'index.html' ? '1.00' : '0.50';
+                if (fs.existsSync(srcRoutesPath)) {
+                    const routes = require(srcRoutesPath);
+                    const routeList = routes.default || routes || [];
+                    urls = routeList.map(route => {
+                        return `
+  <url>
+    <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <priority>${route === '/' ? '1.00' : '0.50'}</priority>
+  </url>`;
+                    }).join('');
+                } else {
+                    const files = globSync('**/*.html', {
+                        cwd: distDir,
+                        ignore: ['404.html', '403.html', ...exclude],
+                    });
 
-                    return `
-    <url>
-        <loc>${loc}</loc>
-        <lastmod>${lastmod}</lastmod>
-        <priority>${priority}</priority>
-    </url>`;
-                }).join('');
+                    urls = files.map((file) => {
+                        const loc = `${siteUrl.replace(/\/$/, '')}/${file.replace(/index\.html$/, '').replace(/\\/g, '/')}`;
+                        const stats = fs.statSync(path.join(distDir, file));
+                        const lastmod = stats.mtime.toISOString().split('T')[0];
+                        const priority = file === 'index.html' ? '1.00' : '0.50';
+
+            return `
+  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <priority>${priority}</priority>
+  </url>`;
+                    }).join('');
+                }
 
                 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}

@@ -15,9 +15,24 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
-## [1.1.0] – 06-07-2025
+## [1.2.0] – 08-06-2025
 
-### ✨ Added
+### ✨ Ajout
+
+- Détection automatique d’un fichier `src/routes-list.js` pour les projets SPA (React, Vue, etc.)
+- Utilisation des routes listées pour générer le `sitemap.xml` si le fichier est présent
+- Fallback sur le scan classique des fichiers HTML sinon
+- Documentation mise à jour avec un exemple de `routes-list.js`
+
+<br>
+
+---
+
+<br>
+
+## [1.1.0] – 07-06-2025
+
+### ✨ Ajout
 
 - Option `disallow` permettant de définir des chemins à exclure dans `robots.txt`
 - Documentation et exemples d'utilisation de l'option `disallow`
@@ -29,7 +44,7 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
-## [1.0.0] – 06-07-2025
+## [1.0.0] – 07-06-2025
 
 ### ✨ Ajout
 
