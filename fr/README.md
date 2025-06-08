@@ -33,11 +33,12 @@ import seoFiles from 'vite-plugin-seo-files';
 export default defineConfig({
     plugins: [
         seoFiles({
-            siteUrl: 'https://example.com', // ✅ Obligatoire
-            generateSitemap: true, // facultatif, défaut : true
-            generateRobots: true, // facultatif, défaut : true
-            exclude: ['test.html', 'drafts/**'], // facultatif, glob patterns
-            disallow: ['/private/', '/secret.html'] // facultatif, chemins à exclure dans robots.txt
+            siteUrl: 'https://exemple.com', // ✅ Requis : URL de base du site
+            generateSitemap: true, // Facultatif : génère sitemap.xml (défaut : true)
+            generateRobots: true, // Facultatif : génère robots.txt (défaut : true)
+            exclude: ['test.html', 'drafts/**'], // Facultatif : fichiers à exclure du sitemap (glob)
+            additionalUrls: ['/external-page', '/api/landing'], // Facultatif : URLs à ajouter manuellement dans le sitemap
+            disallow: ['/private/', '/secret.html'] // Facultatif : chemins à bloquer dans robots.txt
         })
     ]
 });
@@ -75,13 +76,15 @@ Après `vite build`, le plugin écrit automatiquement dans `dist/` :
 | `generateSitemap` | `boolean`  | `true`     | Active/désactive la génération du `sitemap.xml`                     |
 | `generateRobots`  | `boolean`  | `true`     | Active/désactive la génération du `robots.txt`                      |
 | `exclude`         | `string[]` | `[]`       | Liste de patterns glob à ignorer dans le `sitemap.xml`              |
+| `additionalUrls`  | `string[]` | `[]`       | URLs personnalisées à ajouter manuellement dans le `sitemap.xml`    |
 | `disallow`        | `string[]` | `[]`       | Liste de chemins à exclure via `robots.txt` (directive Disallow)    |
 
 ## ✨ Fonctionnalités incluses
 
+- Compatible avec tous les projets Vite (SPA, MPA, static)
 - Extraction de la date de modification réelle (`lastmod`) des fichiers `.html`
 - Utilisation automatique de `src/routes-list.js` si présent (pour les SPA)
-- Compatible avec tous les projets Vite (SPA, MPA, static)
+- Ajout d’URLs personnalisées avec `additionalUrls`
 - Exclusion personnalisée via `exclude`
 - Règles Disallow personnalisables via `disallow`
 

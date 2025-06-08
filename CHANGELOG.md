@@ -15,6 +15,19 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [1.3.1] – 2025-06-08
+
+### ✨ Added
+
+- Added custom URLs via `additionalUrls` in the sitemap
+- Updated documentation and usage examples
+
+<br>
+
+---
+
+<br>
+
 ## [1.2.1] – 2025-06-08
 
 ### 🐛 Fixed

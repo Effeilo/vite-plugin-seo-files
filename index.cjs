@@ -9,6 +9,7 @@ const { globSync } = require('glob');
  * @param {boolean} [options.generateSitemap=true]
  * @param {boolean} [options.generateRobots=true]
  * @param {string[]} [options.exclude=[]] - Glob patterns to exclude from sitemap
+ * @param {string[]} [options.additionalUrls=[]] - Extra URLs to include manually in sitemap
  * @param {string[]} [options.disallow=[]] - Paths to disallow in robots.txt
  */
 function seoFilesPlugin(options = {}) {
@@ -17,6 +18,7 @@ function seoFilesPlugin(options = {}) {
         generateSitemap = true,
         generateRobots = true,
         exclude = [],
+        additionalUrls = [],
         disallow = []
     } = options;
 
@@ -44,11 +46,11 @@ function seoFilesPlugin(options = {}) {
                     const routeList = routes.default || routes || [];
                     urls = routeList.map(route => {
                         return `
-  <url>
-    <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <priority>${route === '/' ? '1.00' : '0.50'}</priority>
-  </url>`;
+    <url>
+        <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <priority>${route === '/' ? '1.00' : '0.50'}</priority>
+    </url>`;
                     }).join('');
                 } else {
                     const files = globSync('**/*.html', {
@@ -63,16 +65,25 @@ function seoFilesPlugin(options = {}) {
                         const priority = file === 'index.html' ? '1.00' : '0.50';
 
             return `
-  <url>
-    <loc>${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <priority>${priority}</priority>
-  </url>`;
+    <url>
+        <loc>${loc}</loc>
+        <lastmod>${lastmod}</lastmod>
+        <priority>${priority}</priority>
+    </url>`;
                     }).join('');
                 }
 
+                const manualUrls = additionalUrls.map(route => {
+                    return `
+    <url>
+        <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <priority>0.50</priority>
+    </url>`;
+                }).join('');
+
                 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}${manualUrls}
 </urlset>`;
 
                 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap.trim());

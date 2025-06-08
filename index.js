@@ -10,6 +10,7 @@ import { pathToFileURL } from 'url';
  * @param {boolean} [options.generateSitemap=true]
  * @param {boolean} [options.generateRobots=true]
  * @param {string[]} [options.exclude=[]] - Glob patterns to exclude from sitemap
+ * @param {string[]} [options.additionalUrls=[]] - Extra URLs to include manually in sitemap
  * @param {string[]} [options.disallow=[]] - Paths to disallow in robots.txt
  */
 
@@ -19,6 +20,7 @@ export default function seoFilesPlugin(options = {}) {
         generateSitemap = true,
         generateRobots = true,
         exclude = [],
+        additionalUrls = [],
         disallow = []
     } = options;   
 
@@ -41,40 +43,50 @@ export default function seoFilesPlugin(options = {}) {
             if (generateSitemap) {
                 let urls = '';
 
-            if (fs.existsSync(srcRoutesPath)) {
-                const routesModule = await import(pathToFileURL(srcRoutesPath).href);
-                const routes = routesModule.default || [];
-                urls = routes.map(route => {
-                    return `
+                if (fs.existsSync(srcRoutesPath)) {
+                    const routesModule = await import(pathToFileURL(srcRoutesPath).href);
+                    const routes = routesModule.default || [];
+                    urls = routes.map(route => {
+                        return `
     <url>
         <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
         <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
         <priority>${route === '/' ? '1.00' : '0.50'}</priority>
     </url>`;
-                }).join('');
-            } else {
-                const files = globSync('**/*.html', {
-                    cwd: distDir,
-                    ignore: ['404.html', '403.html', ...exclude],
-                });
+                    }).join('');
+                } else {
+                    const files = globSync('**/*.html', {
+                        cwd: distDir,
+                        ignore: ['404.html', '403.html', ...exclude],
+                    });
 
-                urls = files.map((file) => {
-                    const loc = `${siteUrl.replace(/\/$/, '')}/${file.replace(/index\.html$/, '').replace(/\\/g, '/')}`;
-                    const stats = fs.statSync(path.join(distDir, file));
-                    const lastmod = stats.mtime.toISOString().split('T')[0];
-                    const priority = file === 'index.html' ? '1.00' : '0.50';
+                    urls = files.map((file) => {
+                        const loc = `${siteUrl.replace(/\/$/, '')}/${file.replace(/index\.html$/, '').replace(/\\/g, '/')}`;
+                        const stats = fs.statSync(path.join(distDir, file));
+                        const lastmod = stats.mtime.toISOString().split('T')[0];
+                        const priority = file === 'index.html' ? '1.00' : '0.50';
 
-                    return `
+                        return `
     <url>
         <loc>${loc}</loc>
         <lastmod>${lastmod}</lastmod>
         <priority>${priority}</priority>
     </url>`;
+                    }).join('');
+                }
+
+                // Ajoute les URLs supplémentaires manuellement définies
+                const manualUrls = additionalUrls.map(route => {
+                    return `
+    <url>
+        <loc>${siteUrl.replace(/\/$/, '')}${route}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <priority>0.50</priority>
+    </url>`;
                 }).join('');
-            }
 
                 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}${manualUrls}
 </urlset>`;
 
                 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap.trim());

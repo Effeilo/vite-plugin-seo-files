@@ -15,6 +15,19 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.3.1] – 08-06-2025
+
+### ✨ Ajout
+
+- Ajout d’URLs personnalisées avec `additionalUrls` dans le sitemap
+- Mise à jour de la documentation et des exemples d’utilisation
+
+<br>
+
+---
+
+<br>
+
 ## [1.2.1] – 08-06-2025
 
 ### 🐛 Correction

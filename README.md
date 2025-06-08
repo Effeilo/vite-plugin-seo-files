@@ -33,11 +33,12 @@ import seoFiles from 'vite-plugin-seo-files';
 export default defineConfig({
     plugins: [
         seoFiles({
-            siteUrl: 'https://example.com', // ✅ Required
-            generateSitemap: true, // optional, default: true
-            generateRobots: true, // optional, default: true
-            exclude: ['test.html', 'drafts/**'], // optional, glob patterns
-            disallow: ['/private/', '/secret.html'] // optional, robots.txt disallow rules
+            siteUrl: 'https://example.com', // ✅ Required: base URL of your site
+            generateSitemap: true,          // Optional: generate sitemap.xml (default: true)
+            generateRobots: true,           // Optional: generate robots.txt (default: true)
+            exclude: ['test.html', 'drafts/**'], // Optional: glob patterns to exclude from sitemap
+            additionalUrls: ['/external-page', '/api/landing'], // Optional: extra URLs to manually include in sitemap
+            disallow: ['/private/', '/secret.html'] // Optional: paths to disallow in robots.txt
         })
     ]
 });
@@ -75,13 +76,15 @@ After `vite build`, the plugin automatically writes to `dist/`:
 | `generateSitemap` | `boolean`  | `true`    | Enable/disable sitemap generation                                |
 | `generateRobots`  | `boolean`  | `true`    | Enable/disable robots.txt generation                             |
 | `exclude`         | `string[]` | `[]`      | List of glob patterns to exclude from the sitemap                |
+| `additionalUrls`  | `string[]` | `[]`      | Custom URLs to manually include in the `sitemap.xml`             |
 | `disallow`        | `string[]` | `[]`      | List of paths to disallow in robots.txt                          |
 
 ## ✨ Included Features
 
+- Compatible with all Vite projects (SPA, MPA, static)
 - Extracts real `lastmod` modification dates from `.html` files
 - Automatic use of `src/routes-list.js` if present (for SPAs)
-- Compatible with all Vite projects (SPA, MPA, static)
+- Added custom URLs with additionalUrls
 - Custom exclusion via `exclude`
 - robots.txt disallow rules via `disallow`
 
