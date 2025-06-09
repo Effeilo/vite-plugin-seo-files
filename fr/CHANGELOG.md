@@ -15,6 +15,18 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [1.3.2] – 09-06-2025
+
+### ✅ Mis à jour
+
+- Déclaration de compatibilité avec Vite 6 (`vite@^6.0.0`) dans `peerDependencies`
+
+<br>
+
+---
+
+<br>
+
 ## [1.3.1] – 08-06-2025
 
 ### ✨ Ajout

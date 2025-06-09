@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [1.3.2] – 2025-06-09
+
+### ✅ Updated
+
+- Declared compatibility with Vite 6 (`vite@^6.0.0`) in `peerDependencies`
+
+<br>
+
+---
+
+<br>
+
 ## [1.3.1] – 2025-06-08
 
 ### ✨ Added
