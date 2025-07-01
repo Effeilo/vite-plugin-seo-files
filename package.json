@@ -27,7 +27,7 @@
     "bugs": {
         "url": "https://github.com/Effeilo/vite-plugin-seo-files/issues"
     },
-        "homepage": "https://github.com/Effeilo/vite-plugin-seo-files",
+    "homepage": "https://github.com/Effeilo/vite-plugin-seo-files",
     "dependencies": {
         "glob": "^11.0.2"
     },

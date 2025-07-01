@@ -1,7 +1,7 @@
 **EN** | [FR](./fr/README.md)
 
 <div>
-  <img src="https://browserux.com/assets/img/logo/logo-vite-plugin-seo-pages.png" alt="logo vite-plugin-seo-pages"/>
+  <img src="https://browserux.com/assets/img/logo/logo-vite-plugin-seo-files.png" alt="logo vite-plugin-seo-files"/>
 </div>
 
 # vite-plugin-seo-files
