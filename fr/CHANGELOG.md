@@ -15,6 +15,20 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [2.0.0] – 04-07-2025
+
+### ✨ Modifications
+
+- Migration complète du code vers TypeScript et ESM natif ("type": "module")
+- Les types du plugin sont désormais générés (index.d.ts) pour une utilisation directe dans vite.config.ts
+- Mise à jour du tsconfig et du système de build pour assurer la compatibilité avec Vite 6+
+
+<br>
+
+---
+
+<br>
+
 ## [1.3.2] – 09-06-2025
 
 ### ✅ Mis à jour

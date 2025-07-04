@@ -148,6 +148,20 @@ Sitemap: https://browserux.com/sitemap.xml
 - Utilisez `exclude` pour retirer des pages de brouillon, erreurs, etc.
 - Utilisez `disallow` pour empêcher l’indexation de chemins spécifiques via `robots.txt`
 
+## 🧑‍💻 Prise en charge de TypeScript & ESM
+
+Depuis la version **2.0.0**, le plugin est désormais entièrement écrit en **TypeScript** et publié en tant que module **ESM** natif  (`"type": "module"` dans le `package.json`).
+
+Si vous utilisez un fichier `vite.config.ts`, vous bénéficiez désormais automatiquement du support complet des types :
+
+```ts
+import seoFiles from 'vite-plugin-seo-files';
+
+seoFiles({
+  siteUrl: 'https://example.com'
+});
+```
+
 ## ⚖️ Licence
 
 MIT © 2025 [Effeilo](https://github.com/Effeilo)

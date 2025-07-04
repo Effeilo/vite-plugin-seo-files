@@ -15,6 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [2.0.0] – 2025-07-04
+
+### ✨ Changed
+
+- Fully migrated codebase to **TypeScript** and **native ESM** (`"type": "module"`)
+- Plugin typings are now bundled (`index.d.ts`) for usage in `vite.config.ts`
+- Updated tsconfig and packaging for Vite 6+ compatibility
+
+<br>
+
+---
+
+<br>
+
+
 ## [1.3.2] – 2025-06-09
 
 ### ✅ Updated

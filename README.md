@@ -13,7 +13,7 @@ It integrates easily into your Vite configuration and works with all frameworks 
 > A practical way to improve indexing and crawling for your static sites or SPAs.
 
 [![npm version](https://img.shields.io/npm/v/vite-plugin-seo-files.svg)](https://www.npmjs.com/package/vite-plugin-seo-files)
-![vite compatibility](https://img.shields.io/badge/Vite-4%2B%20%7C%205%2B-646CFF.svg?logo=vite&logoColor=white)
+![vite compatibility](https://img.shields.io/badge/Vite-4%2B%20%7C%205%2B%20%7C%206%2B-646CFF.svg?logo=vite&logoColor=white)
 
 
 ## 🚀 Installation
@@ -147,6 +147,20 @@ Sitemap: https://browserux.com/sitemap.xml
 - The plugin only runs during `vite build`, not during development
 - Use `exclude` to ignore draft or error pages from the sitemap
 - Use `disallow` to prevent indexing of specific paths in robots.txt
+
+## 🧑‍💻 TypeScript & ESM Support
+
+As of version **2.0.0**, the plugin is now fully written in **TypeScript** and published as native **ESM** (`"type": "module"` in `package.json`).
+
+If you're using `vite.config.ts`, you can now benefit from full typings automatically:
+
+```ts
+import seoFiles from 'vite-plugin-seo-files';
+
+seoFiles({
+  siteUrl: 'https://example.com'
+});
+```
 
 ## ⚖️ License
 
