@@ -1,7 +1,7 @@
 **EN** | [FR](./fr/CHANGELOG.md)
 
 <div>
-  <img src="https://browserux.com/assets/img/logo/logo-vite-plugin-seo-files.png" alt="logo vite-plugin-seo-files"/>
+  <img src="https://browserux.com/img/logos/logo-browserux-seo-files-300.png" alt="logo vite-plugin-seo-files"/>
 </div>
 
 # 📦 Changelog
@@ -10,6 +10,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com)
 and this project adheres to [Semantic Versioning](https://semver.org).
+
+---
+
+<br>
+
+## [2.1.0] – 2026-03-29
+
+### ✨ Added
+
+- New `routesFile` option to configure the path to the SPA routes file (default: `'src/routes-list.js'`)
+- Automatic URL deduplication in `sitemap.xml` — prevents duplicate entries when combining `additionalUrls` with routes or scanned files
+
+### 🐛 Fixed
+
+- Output directory is now read from Vite's `build.outDir` config via `configResolved` hook — no longer hardcoded to `dist/`
+
+### 📘 Updated
+
+- README: removed incorrect "No external dependencies" claim
+- README: corrected module format description (native ESM only since v2.0.0, no CJS)
+- README: updated Vite badge to include Vite 6+
+- README: documented new `routesFile` option
+
+<br>
 
 ---
 

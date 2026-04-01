@@ -1,7 +1,7 @@
 [EN](../CHANGELOG.md) | **FR**
 
 <div>
-  <img src="https://browserux.com/assets/img/logo/logo-vite-plugin-seo-files.png" alt="logo vite-plugin-seo-files"/>
+  <img src="https://browserux.com/img/logos/logo-browserux-seo-files-300.png" alt="logo vite-plugin-seo-files"/>
 </div>
 
 # 📦 Changelog
@@ -10,6 +10,30 @@ Toutes les modifications notables de ce projet seront documentées dans ce fichi
 
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)  
 et ce projet suit les recommandations de versionnage [SemVer](https://semver.org/lang/fr/).
+
+---
+
+<br>
+
+## [2.1.0] – 29-03-2026
+
+### ✨ Ajout
+
+- Nouvelle option `routesFile` pour configurer le chemin vers le fichier de routes SPA (défaut : `'src/routes-list.js'`)
+- Déduplication automatique des URLs dans le `sitemap.xml` — évite les entrées en double lors de la combinaison d'`additionalUrls` avec les routes ou les fichiers scannés
+
+### 🐛 Correction
+
+- Le répertoire de sortie est désormais lu depuis `build.outDir` dans la config Vite via le hook `configResolved` — plus codé en dur sur `dist/`
+
+### 📘 Mis à jour
+
+- README : suppression de l'affirmation incorrecte "Aucune dépendance externe"
+- README : correction de la description du format de module (ESM natif uniquement depuis v2.0.0, pas de CJS)
+- README : badge Vite mis à jour pour inclure Vite 6+
+- README : documentation de la nouvelle option `routesFile`
+
+<br>
 
 ---
 
