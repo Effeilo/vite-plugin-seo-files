@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 <br>
 
+## [2.1.1] – 2026-04-01
+
+### 🛠️ Fixed
+
+- Re-published with correct `dist/` build output (2.1.0 was accidentally published without a fresh build)
+
+<br>
+
+---
+
+<br>
+
 ## [2.1.0] – 2026-03-29
 
 ### ✨ Added

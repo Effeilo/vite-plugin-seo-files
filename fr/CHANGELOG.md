@@ -15,6 +15,18 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 
 <br>
 
+## [2.1.1] – 01-04-2026
+
+### 🛠️ Correction
+
+- Re-publié avec le bon contenu du dossier `dist/` (la version 2.1.0 avait été publiée accidentellement sans regénérer le build)
+
+<br>
+
+---
+
+<br>
+
 ## [2.1.0] – 29-03-2026
 
 ### ✨ Ajout
