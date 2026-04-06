@@ -32,11 +32,11 @@ et ce projet suit les recommandations de versionnage [SemVer](https://semver.org
 ### ✨ Ajout
 
 - Nouvelle option `routesFile` pour configurer le chemin vers le fichier de routes SPA (défaut : `'src/routes-list.js'`)
-- Déduplication automatique des URLs dans le `sitemap.xml` — évite les entrées en double lors de la combinaison d'`additionalUrls` avec les routes ou les fichiers scannés
+- Déduplication automatique des URLs dans le `sitemap.xml`, évite les entrées en double lors de la combinaison d'`additionalUrls` avec les routes ou les fichiers scannés
 
 ### 🐛 Correction
 
-- Le répertoire de sortie est désormais lu depuis `build.outDir` dans la config Vite via le hook `configResolved` — plus codé en dur sur `dist/`
+- Le répertoire de sortie est désormais lu depuis `build.outDir` dans la config Vite via le hook `configResolved`, plus codé en dur sur `dist/`
 
 ### 📘 Mis à jour
 

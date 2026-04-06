@@ -32,11 +32,11 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 ### ✨ Added
 
 - New `routesFile` option to configure the path to the SPA routes file (default: `'src/routes-list.js'`)
-- Automatic URL deduplication in `sitemap.xml` — prevents duplicate entries when combining `additionalUrls` with routes or scanned files
+- Automatic URL deduplication in `sitemap.xml`, prevents duplicate entries when combining `additionalUrls` with routes or scanned files
 
 ### 🐛 Fixed
 
-- Output directory is now read from Vite's `build.outDir` config via `configResolved` hook — no longer hardcoded to `dist/`
+- Output directory is now read from Vite's `build.outDir` config via `configResolved` hook, no longer hardcoded to `dist/`
 
 ### 📘 Updated
 
